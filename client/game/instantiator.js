@@ -6,6 +6,7 @@ import Bomb from "./objects/bomb.js"
 import Explosion from "./objects/explosion.js"
 import DmgWall from './objects/damageableWall.js'
 import PowerUp from './objects/powerup.js'
+import Projectile from './objects/projectile.js'
 import { typesId, objectNames, powerup } from '../type.js'
 const { powerUpsId, powerUps } = powerup;
 
@@ -17,6 +18,7 @@ export function instantiateObject(data){
 	else if (data.typeId == typesId.explosion) object = new Explosion(objectData, data.data);
 	else if (data.typeId == typesId.wallDamage) object = new DmgWall(objectData, data.data);
 	else if (data.typeId == typesId.powerup) object = new PowerUp(objectData, data.data);
+	else if (data.typeId == typesId.projectile) object = new Projectile(objectData, data.data);
 	else object = new Object(objectData);
 	
 	return object;

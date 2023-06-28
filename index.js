@@ -42,6 +42,7 @@ const typesId = toReadonly({
   //bombPlace: 4,
   entity: 5,
   powerup: 6,
+	projectile: 7,
 });
 
 const objects = toReadonly({
@@ -51,6 +52,7 @@ const objects = toReadonly({
   bomb: { name: "Bomb", drawType: objectTypes.item, typeId: typesId.bomb, width: mapGridSize, height: mapGridSize, resizeable: false, },
   //bombPlace: { name: "Bomb Place", drawType: objectTypes.debug, typeId: typesId.bombPlace, width: mapGridSize, height: mapGridSize, resizeable: false, },
   powerup: { name: "Power Up", drawType: objectTypes.item, typeId: typesId.powerup, width: mapGridSize, height: mapGridSize, resizeable: false, },
+  projectile: { name: "Projectile", drawType: objectTypes.item, typeId: typesId.projectile, width: mapGridSize, height: mapGridSize, resizeable: false, },
 });
 
 const powerUps = toReadonly({
@@ -231,10 +233,10 @@ function addObject(data){
 		...objects[data.name],
 		data: { ...data.data },
 		id: ++game.ids[data.name],
-		position: { ...data.position },
-		width: data.width,
-		height: data.height,
+		position: { ...data.position }
 	};
+	if(data.width != undefined) obj.width = data.width;
+	if(data.height != undefined) obj.height = data.height;
 	if (data.typeId == typesId.wallDamage) addPowerUpToWall(obj);
 	game.map.objects.push(obj);
 	io.sockets.emit("object-add", obj);

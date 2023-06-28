@@ -1,5 +1,6 @@
 import animationJson from "../../animation/setas.json" assert {type: 'json'};
 import * as renderer from '../../renderer.js'
+import * as type from '../../../type.js'
 const aExternal = document.getElementById('a-external');
 
 export const skillBinding = {
@@ -81,5 +82,11 @@ function onAimMove(eventData, data){
 
 function shoot(eventData, data){
 	// invoke shoot
+	data.helpers.game.requestObject({ 
+		type: type.typesId.projectile, 
+		name: 'projectile', 
+		position: { ...data.entity.position }, 
+		data: { destination: { ...eventData.asGridPos }, type: 'akio_shoot' } 
+	});
 	data.entity.skillEnd('skill2');
 }

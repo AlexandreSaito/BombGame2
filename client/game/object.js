@@ -96,6 +96,10 @@ export default class Object {
 	move(direction) {
 		if (!direction.x) direction.x = 0;
 		if (!direction.y) direction.y = 0;
+		if (direction.x > 1) direction.x = 1;
+		if (direction.x < -1) direction.x = -1;
+		if (direction.y > 1) direction.y = 1;
+		if (direction.y < -1) direction.y = -1;
 		const velocity = this.getVelocity();
 		this.setPos({ x: this.position.x + direction.x * velocity, y: this.position.y + direction.y * velocity });
 	}

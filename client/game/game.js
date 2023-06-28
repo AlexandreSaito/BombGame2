@@ -68,6 +68,9 @@ export function addEntity(playerId, data) {
 export function getEntity(playerId){
 	return entities.find(x => x.id == playerId);
 }
+export function getEntities(){
+	return entities;
+}
 
 export function updateState(newState){
 	state = { ...newState };
