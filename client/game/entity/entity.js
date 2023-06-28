@@ -103,9 +103,9 @@ export default class Entity extends Object {
 		this.animation.removeColorFilter();
 		this.animation.changeAnimation('death');
 		const onDeathEnd = (anime) => {
-			if(anime.currentAnimation != 'death') return;
-			anime.onAnimationEnd.remove(onDeathEnd);
-			anime.owner.remove();
+			if(anime.animator.currentAnimation != 'death') return;
+			anime.animator.onAnimationEnd.remove(onDeathEnd);
+			anime.animator.owner.isDead = true;
 		};
 		this.animation.onAnimationEnd.add(onDeathEnd);
 	}
@@ -142,10 +142,10 @@ export default class Entity extends Object {
 		const fixedMaxLife = this.getMaxLife();
 		this.currentLife -= amount;
 		this.setInvulnerable(invulnerableTime);
-		if (amount > 0) this.animation.changeAnimation('takeHit');
 		this.onTakeDamage.exec({ entity: this });
 		if (this.currentLife >= fixedMaxLife) this.currentLife = fixedMaxLife;
-		if (this.currentLife <= 0) this.die();
+		if (this.currentLife <= 0) { this.die(); return true; }
+		if (amount > 0) this.animation.changeAnimation('takeHit');
 		
 		return true;
 	}

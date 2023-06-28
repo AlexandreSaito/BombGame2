@@ -228,14 +228,6 @@ export function stop(){
 }
 
 function handleController(){
-	if (player.canWalk) {
-		const pMove = { x: 0, y: 0 };
-		if (actions.right.pressed) pMove.x += 1;
-		if (actions.left.pressed) pMove.x -= 1;
-		if (actions.up.pressed) pMove.y -= 1;
-		if (actions.down.pressed) pMove.y += 1;
-		player.move(pMove);
-	}
 	const cMove = { x: 0, y: 0 };
 	if (actions.cameraRight.pressed) cMove.x += 1;
 	if (actions.cameraLeft.pressed) cMove.x -= 1;
@@ -243,6 +235,16 @@ function handleController(){
 	if (actions.cameraDown.pressed) cMove.y += 1;
 	if(cMove.x != 0 || cMove.y != 0){
 		renderer.moveRenderer(cMove);
+	}
+	
+	if(player.isDead) return;
+	if (player.canWalk) {
+		const pMove = { x: 0, y: 0 };
+		if (actions.right.pressed) pMove.x += 1;
+		if (actions.left.pressed) pMove.x -= 1;
+		if (actions.up.pressed) pMove.y -= 1;
+		if (actions.down.pressed) pMove.y += 1;
+		player.move(pMove);
 	}
 	
 	if(actions.placeBomb.pressed && !actions.placeBomb.isHolding) { actions.placeBomb.isHolding = true; placeBomb(); }
