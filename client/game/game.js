@@ -297,8 +297,7 @@ function playerCollider(data){
 	// TODO: define position in base with CollideX and CollideY
 	
 	if(data.direction.x != 0) {
-		entity.position.x = newPosition.x;
-		entity.position.y = data.lastPosition.y;
+		entity.setPos({ x: newPosition.x, y: data.lastPosition.y });
 		const collideX = collidable.find(x => x.isColliding(entity));
 		if(!collideX) return;
 		if(collideX) {
@@ -312,8 +311,7 @@ function playerCollider(data){
 	}
 
 	if(data.direction.y != 0) {
-		entity.position.x = data.lastPosition.x;
-		entity.position.y = newPosition.y;
+		entity.setPos({ x: data.lastPosition.x, y: newPosition.y });
 		const collideY = collidable.find(x => x.isColliding(entity));
 		if(!collideY) return;
 		if(collideY) {
