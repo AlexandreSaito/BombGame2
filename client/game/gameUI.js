@@ -2,6 +2,8 @@ import * as game from './game.js'
 import * as renderer from './renderer.js'
 import * as type from '../type.js'
 
+const blockedColor = 'hsl(0,0%,35%,33)';
+
 const canvasUIType = type.draw.drawType.ui;
 const uiItemType = -500;
 const lifeId = 1;
@@ -77,7 +79,7 @@ function getCanvasLife(player){
 	const ctx = canvas.getContext('2d', { alpha: true });
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = 'red';
-	ctx.fillRect(lifeFrame.frameGap.x, lifeFrame.frameGap.y, lifeFrame.frameSize.x, lifeFrame.frameSize.y);
+	ctx.fillRect(lifeFrame.frameGap.x, lifeFrame.frameGap.y, lifeFrame.frameSize.x * (oldLife / oldMaxLife), lifeFrame.frameSize.y);
 
 	ctx.font = "bold " + lifeFrame.textHeight + "px Arial";
 	const text = `${oldLife}/${oldMaxLife}`;
@@ -105,14 +107,19 @@ function getCanvasPowerUp(player) {
 		const pu = powerup[i];
 		ctx.fillStyle = 'white';
 		const width = powerupFrame.frameGap.x + (powerupFrame.frameSize + powerupFrame.frameGap.x) * i;
-		ctx.fillRect(width, powerupFrame.frameGap.y, powerupFrame.frameSize, powerupFrame.frameSize);
-		ctx.drawImage(icons[pu.name], powerupFrame.frameGap.y, powerupFrame.frameSize, powerupFrame.frameSize);
+		//ctx.fillRect(width, powerupFrame.frameGap.y, powerupFrame.frameSize, powerupFrame.frameSize);
+		ctx.drawImage(icons[pu.name], width, powerupFrame.frameGap.y, powerupFrame.frameSize, powerupFrame.frameSize);
 		const metrics = ctx.measureText(`${pu.qtd}`);
 		const textWidth = metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft;
 		const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+
+		if(pu.qtd == 0) {
+			ctx.fillStyle = blockedColor;
+			ctx.fillRect(width, powerupFrame.frameGap.y, powerupFrame.frameSize, powerupFrame.frameSize);
+		}
 		
 		ctx.fillStyle = 'red';
-		ctx.fillText(`${pu.qtd}`, width - textWidth - powerupFrame.frameGap.x - 2, powerupFrame.frameSize + powerupFrame.frameGap.y - textHeight + 5);
+		ctx.fillText(`${pu.qtd}`, width + powerupFrame.frameSize - textWidth - 2, powerupFrame.frameSize + powerupFrame.frameGap.y - textHeight + 5);
 	}
 	
 	const w = fixSize(lifeFrame.frameSize.x + lifeFrame.frameGap.x * 2, 1, [ 1, 1 ]).width + 15;
@@ -157,6 +164,11 @@ function getCanvasSkill(player){
 				const currentTimePassed = lastTick - (activedSkill.activeTimeStamp + (skill.activeTime < 0 ? skill.activeTime * -1 : skill.activeTime));
 				time = (skill.cd - currentTimePassed) / 1000;
 			}
+		}
+
+		if(activedSkill.active == false){
+			ctx.fillStyle = blockedColor;
+			ctx.fillRect(startWidth, skillFrame.frameGap.y, skillFrame.frameSize, skillFrame.frameSize);
 		}
 		
 		const cdText = `${Math.floor(time)}s`;

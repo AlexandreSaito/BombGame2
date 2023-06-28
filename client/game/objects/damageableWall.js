@@ -15,7 +15,7 @@ export default class DmgWall extends Object{
 	onRemove(){
 		if(this.powerup != null && this.powerup != undefined)
 			// resize?
-			game.addObject({ position: { ...this.position }, width: this.width, height: this.height, name: objectNames.powerup, typeId: typesId.powerup, type: draw.drawType.item, id: this.id, data: { powerup: this.powerup } });
+			game.addObject({ position: { ...this.position }, width: this.width, height: this.height, name: objectNames.powerup, typeId: typesId.powerup, drawType: draw.drawType.item, id: this.id, data: { powerup: this.powerup } });
 	}
 	
 	takeDamage(amount){

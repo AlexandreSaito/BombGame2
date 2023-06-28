@@ -103,6 +103,7 @@ export default class Animation {
 	}
 
 	getRenderDef(){
+		if(this.owner.drawType == undefined) throw new Error('Draw type nulo!');
 		return [this.owner.drawType, this.owner.typeId, this.owner.id];
 	}
 

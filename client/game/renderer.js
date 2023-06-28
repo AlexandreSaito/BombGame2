@@ -1,6 +1,6 @@
 import { toReadonly, draw } from '../type.js'
 import * as eng from './eng.js'
-const { drawTypeId } = draw; 
+const { drawType, drawTypeId } = draw; 
 
 let rerender = false;
 
@@ -11,6 +11,17 @@ const renderer = {
 };
 
 const renderData = {};
+
+const singles = {};
+
+export function getDrawType(){
+	return drawType;
+}
+
+export function getSingleId(type){
+	if(!singles[type]) singles[type] = 1;
+	return singles[type]++;
+}
 
 export function getScreenSize(){
 	return eng.getScreen();;

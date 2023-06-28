@@ -73,27 +73,29 @@ export default class Entity extends Object {
 		char.register(this);
 	}
 
-	skillStart(skill){
+	skillStart(skill) {
 		if(this.skills[skill] && this.skills[skill].onCD) return;
 		this.onSkill.exec({ name: skill, entity: this });
 	}
 
-	skillInit(skill, data){
+	skillInit(skill, data) {
 		if(this.skills[skill] && this.skills[skill].onCD) return;
 		if(!this.skills[skill]) this.skills[skill] = {};
 		this.skills[skill].onCD = true;
 		this.onSkillIni.exec({ name: skill, data, entity: this });
-		if(this[skill].activeTime > 0) this.skills[skill].active = true;
+		if(this[skill].activeTime >= 0) this.skills[skill].active = true;
 	}
 
-	skillEnd(skill){
+	skillEnd(skill) {
 		if(this[skill].activeTime > 0) this.skills[skill].active = false;
 		this.onSkillEnd.exec({ name: skill, entity: this });
 	}
 
 	die(){
-		game.requestUserDeath();
-		this.death();
+		if(this.id == game.getUserId()){
+			game.requestDeath();
+			this.death();
+		}
 	}
 	
 	death() { 
@@ -105,7 +107,7 @@ export default class Entity extends Object {
 			anime.onAnimationEnd.remove(onDeathEnd);
 			anime.owner.remove();
 		};
-		this.animation.onAnimationEnd(onDeathEnd);
+		this.animation.onAnimationEnd.add(onDeathEnd);
 	}
 
 	move(direction){

@@ -1,6 +1,7 @@
 import * as conn from '../../connection.js'
-import * as saito from './characters/saito.js';
-import * as saitoadm from './characters/saitoadm.js';
+import * as saito from './characters/saito.js'
+import * as akio from './characters/akio.js'
+import * as saitoadm from './characters/saitoadm.js'
 import * as game from '../game.js'
 
 function getDefault(char){
@@ -39,6 +40,7 @@ function getDefault(char){
 export function getChar(char) {
 	if(char == 'saito') return getDefault(saito, entity);
 	if(char == 'saitoadm') return getDefault(saitoadm, entity);
+	if(char == 'akio') return getDefault(akio, entity);
 }
 
 function register(char, entity) {
@@ -73,7 +75,7 @@ function register(char, entity) {
 		
 		skill.init(data);
 
-		if(skill.activeTime >= 0){
+		if(skill.activeTime > 0){
 			setTimeout(() => { entity.skillEnd(data.name); }, skill.activeTime);
 		}
 	});

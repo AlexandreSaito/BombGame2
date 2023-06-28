@@ -30,7 +30,7 @@ export default class Explosion extends Object {
 		if(this.width < this.height) return { x: 1, y: Math.ceil(this.height / game.gridSize)};
 	}
 	
-	getAnimeModfy() {
+	getAnimationMod() {
 		return `w${this.width}h${this.height}`;
 	}
 

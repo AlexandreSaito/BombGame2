@@ -64,11 +64,13 @@ const powerUps = toReadonly({
 
 const charList = toReadonly({
   saito: { name: "Saito", id: "saito" },
+  akio: { name: "Akio", id: "akio" },
 });
 
 const entities = toReadonly({
   saitoadm: { x: 0, y: 0, z: 0, width: 40, height: 40, drawType: "entity", typeId: typesId.entity, animation: "idle", char: "saitoadm", },
   saito: { x: 0, y: 0, z: 0, width: 40, height: 40, drawType: "entity", typeId: typesId.entity, animation: "idle", char: charList.saito.id, },
+  akio: { x: 0, y: 0, z: 0, width: 40, height: 40, drawType: "entity", typeId: typesId.entity, animation: "idle", char: charList.akio.id, },
 });
 
 const connections = { lastUserId: 0, users: {} };
@@ -141,12 +143,13 @@ io.on("connection", (socket) => {
         const effects = {};
         effects[powerUps.bombSpread] = 1;
         effects[powerUps.bombDamage] = 1;
+        effects[powerUps.bombCount] = 1;
         game.state.players[userId] = {
 					...entities[data.char],
 					x: spawnPoint.x,
 					y: spawnPoint.y,
           char: data.char,
-          defaultMaxBomb: 2,
+          defaultMaxBomb: 0,
           data: { effects: effects },
         };
       }

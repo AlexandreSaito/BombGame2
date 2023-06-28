@@ -12,7 +12,7 @@ menus.append(wrapper);
 const selectedColor = "#2f4db959";
 const screen = { width: document.documentElement.clientWidth,	height: document.documentElement.clientHeight }
 
-const mouseRenderData = {};
+const mouseRenderData = {  };
 
 let currentMousePosition = { x: 0, y: 0 };
 let positionList = [];

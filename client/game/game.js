@@ -79,7 +79,7 @@ export function updateState(newState){
 		if (x.id != userId) {
 			x.setPos(data.pos);
 			if (x.animation.currentAnimation != data.animation)
-				x.changeAnimation(data.animation);
+				x.animation.changeAnimation(data.animation);
 		}
 		delete newState.players[x.id];
 	});
@@ -184,16 +184,29 @@ export function removeMouseEvent(event, action){
 }
 
 function mouseMove(e){
-	const data = { inWorldPos: renderer.getMousePosAsWorldPos(e), e: e };
+	const pos = renderer.getMousePosAsWorldPos(e);
+	const data = { inWorldPos: pos, asGridPos: toGridPos(pos), e: e };
 	onMouseMove.exec(data);
 }
 function mouseUp(e){
-	const data = { inWorldPos: renderer.getMousePosAsWorldPos(e), e: e };
+	const pos = renderer.getMousePosAsWorldPos(e);
+	const data = { inWorldPos: pos, asGridPos: toGridPos(pos), e: e };
 	onMouseUp.exec(data);
 }
 function mouseDown(e){
-	const data = { inWorldPos: renderer.getMousePosAsWorldPos(e), e: e };
+	const pos = renderer.getMousePosAsWorldPos(e);
+	const data = { inWorldPos: pos, asGridPos: toGridPos(pos), e: e };
 	onMouseDown.exec(data);
+}
+
+function toGridPos(position){
+	const resX = (position.x >= 0 ? position.x : position.x * -1) % gridSize;
+	const resY = (position.y >= 0 ? position.y : position.y * -1) % gridSize;
+	const pos = { 
+		x: position.x - (position.x >= 0 ? resX : resX * -1), 
+		y: position.y - resY
+	};
+	return pos;
 }
 
 export function init(){
@@ -249,7 +262,7 @@ export function bombExplode(bombId, explosions){
 	const bomb = map.objects.find(x => x.typeId == types.typesId.bomb && x.id == bombId);
 	if (!bomb) return;
 	bomb.explode();
-	explosions.forEach(x => { addObject(x); });
+	explosions.forEach(x => { if(x.width != 0 && x.height != 0) addObject(x); });
 }
 
 export function collectPowerUp(obj){
