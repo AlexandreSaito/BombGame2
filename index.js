@@ -150,6 +150,7 @@ io.on("connection", (socket) => {
 					y: spawnPoint.y,
           char: data.char,
           defaultMaxBomb: 0,
+          maxLife: 3,
           data: { effects: effects },
         };
       }

@@ -33,12 +33,12 @@ export default class Entity extends Object {
 
 		super({ ...objData, drawType: drawType.entity, animation: char.animation });
 
-		this.maxLife = 3;
+		this.maxLife = objData.maxLife;
 		this.currentLife = this.maxLife;
 
-		this.originalBombLimit = 1;
+		this.originalBombLimit = objData.defaultMaxBomb;
 		this.bombLimit = this.originalBombLimit;
-		this.bombDeployed = 0;
+		//this.bombDeployed = 0;
 		this.canWalk = true;
 		
 		this.invulnerableTime = 3000;
