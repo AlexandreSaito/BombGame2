@@ -1,0 +1,38 @@
+html, body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+.floating-menu {
+	font-family: sans-serif;
+	background: yellowgreen;
+	padding: 5px;;
+	width: 130px;
+	z-index: 100;
+	position: fixed;
+}
+
+.floating-menu.right{
+	right: 0px;
+}
+.floating-menu.left{
+	left: 0px;
+}
+.floating-menu.bottom{
+	bottom: 0px;
+}
+.floating-menu.top{
+	top: 0px;
+}
+
+.floating-menu a, .floating-menu h3 {
+	font-size: 0.9em;
+	display: block;
+	margin: 0 0.5em;
+	color: white;
+}
+
+.game{
+	position: absolute;
+}

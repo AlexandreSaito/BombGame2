@@ -1,0 +1,17 @@
+{
+	"binds": {
+		"w": "up",
+		"a": "left",
+		"s": "down",
+		"d": "right",
+		"z": "placeBomb",
+		"1": "skill1",
+		"2": "skill2",
+		"3": "skill3",
+		"4": "skill4",
+		"8": "cameraRight",
+		"0": "cameraLeft",
+		"7": "cameraUp",
+		"9": "cameraDown"
+	}
+}

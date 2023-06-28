@@ -1,0 +1,30 @@
+{
+	"name": "bomb",
+	"animations": [
+		{
+				"name": "idle",
+				"src": "/img/icons/bomb.png",
+				"loop": true,
+				"regress": true,
+				"frames": [
+					{
+						"spec": {
+							"x": 200,
+							"y": 100,
+							"width": 624,
+							"height": 824
+						},
+						"offset": {
+							"x": 0,
+							"y": 0
+						},
+						"grow": {
+							"x": 0,
+							"y": 0
+						},
+						"frameSpace": 5
+					}
+				]
+		}
+	]
+}

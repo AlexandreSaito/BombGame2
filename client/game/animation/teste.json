@@ -1,0 +1,70 @@
+{
+	"name": "a",
+	"animations": [
+			{
+					"name": "idle",
+					"src": "/img/boneco.png",
+					"loop": true,
+					"frames": [
+						{
+								"spec": {
+										"x": 0,
+										"y": 0,
+										"width": 50,
+										"height": 50
+								},
+								"offset": {
+										"x": 0,
+										"y": 20
+								},
+								"grow": {
+										"x": 0,
+										"y": 20
+								},
+								"frameSpace": 0
+						},
+						{
+									"spec": {
+											"x": 0,
+											"y": 0,
+											"width": 90,
+											"height": 90
+									},
+									"offset": {
+											"x": 0,
+											"y": 20
+									},
+									"grow": {
+											"x": 0,
+											"y": 20
+									},
+									"frameSpace": 10
+							}
+					]
+			},
+			{
+					"name": "walk",
+					"src": "/img/boneco.png",
+					"loop": true,
+					"frames": [
+						{
+								"spec": {
+										"x": 0,
+										"y": 0,
+										"width": 50,
+										"height": 50
+								},
+								"offset": {
+										"x": 0,
+										"y": 20
+								},
+								"grow": {
+										"x": 0,
+										"y": 20
+								},
+								"frameSpace": 0
+						}
+					]
+			}
+	]
+}

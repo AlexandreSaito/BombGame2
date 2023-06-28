@@ -1,0 +1,30 @@
+{
+	"name": "explosion",
+	"animations": [
+		{
+				"name": "idle",
+				"src": "/img/explosion.png",
+				"loop": true,
+				"repeatFrames": true,
+				"frames": [
+					{
+						"spec": {
+							"x": 0,
+							"y": 0,
+							"width": 80,
+							"height": 80
+						},
+						"offset": {
+							"x": 0,
+							"y": 0
+						},
+						"grow": {
+							"x": 0,
+							"y": 0
+						},
+						"frameSpace": 0
+					}
+				]
+		}
+	]
+}

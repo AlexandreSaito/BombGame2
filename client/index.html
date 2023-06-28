@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.io</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+		<dialog id="char-selector-dialog">
+		  <form method="dialog">
+		    <section>
+		      <p>
+		        <label for="char-selector">Escolhe:</label>
+		        <select id="char-selector">
+		          <option value="saito">saito</option>
+		        </select>
+		      </p>
+		    </section>
+		    <menu>
+		      <!--<button id="cancel" type="reset">Cancel</button>-->
+		      <button type="submit">Confirm</button>
+		      <button type="button" id="btn-saito">Saito</button>
+		    </menu>
+		  </form>
+		</dialog>
+		<div id='menus'></div>
+    <label>PING: <span id="ping"></span></label>
+    <label>FPS: <span id="fps"></span></label>
+    <label>Client: <span id="clientFps"></span></label>
+    <label>Worker: <span id="workerFps"></span></label>
+    <script src="/socket.io/socket.io.js"></script>
+		<div id="game">
+	 		<canvas id="entity" class="game" width="0" height="0"></canvas>
+	 		<canvas id="cenario" class="game" width="0" height="0"></canvas>
+	 		<canvas id="item" class="game" width="0" height="0"></canvas>
+	 		<canvas id="effect" class="game" width="0" height="0"></canvas>
+	 		<canvas id="debug" class="game" width="0" height="0"></canvas>
+	 		<canvas id="ui" class="game" width="0" height="0"></canvas>
+	 		<div id="html-ui" class="game" width="0" height="0"></div>
+		</div>
+		<script src="/script.js" type="module"></script>
+  </body>
+</html>

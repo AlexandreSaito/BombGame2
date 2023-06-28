@@ -1,0 +1,29 @@
+{
+	"name": "a",
+	"animations": [
+			{
+					"name": "idle",
+					"src": "/img/cZ0gC.png",
+					"loop": true,
+					"frames": [
+							{
+									"spec": {
+											"x": 0,
+											"y": 0,
+											"width": 150,
+											"height": 150
+									},
+									"offset": {
+											"x": 0,
+											"y": 20
+									},
+									"grow": {
+											"x": 0,
+											"y": 20
+									},
+									"frameSpace": 0
+							}
+					]
+			}
+	]
+}

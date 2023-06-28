@@ -1,0 +1,5 @@
+/node_modules
+/dependency/
+/.project
+/coverage
+/*.log

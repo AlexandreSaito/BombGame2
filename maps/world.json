@@ -1,0 +1,5 @@
+{
+	"name": "t1",
+	"objects": [ ],
+	"rules": { "spawnPoint": [ { x: 100, y: 100 } ] }
+}

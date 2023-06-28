@@ -1,0 +1,8 @@
+[
+	{ "id": 0, "name": "Bomb", "typeName": "bomb" },
+	{ "id": 1, "name": "Explosion", "typeName": "explosion" },
+	{ "id": 2, "name": "Wall", "typeName": "wall" },
+	{ "id": 3, "name": "WallDamage", "typeName": "wallDamage" },
+	{ "id": 5, "name": "Entity", "typeName": "entity" },
+	{ "id": 6, "name": "Power Up", "typeName": "powerup" }
+]

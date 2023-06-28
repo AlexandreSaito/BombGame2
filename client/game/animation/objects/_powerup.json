@@ -1,0 +1,176 @@
+[
+	{
+		"name": "bombPierce",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/bombPierce.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	},
+	{
+		"name": "bombCount",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/bombCount.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	},
+	{
+		"name": "bombDamage",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/bombDamage.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	},
+	{
+		"name": "bombSpread",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/bombSpread.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	},
+	{
+		"name": "maxLife",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/maxLife.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	},
+	{
+		"name": "speed",
+		"animations": [
+			{
+					"name": "idle",
+					"src": "/img/powerup/speed.png",
+					"loop": true,
+					"frames": [
+						{
+							"spec": {
+								"x": 0,
+								"y": 0,
+								"width": 80,
+								"height": 80
+							},
+							"offset": {
+								"x": 0,
+								"y": 0
+							},
+							"grow": {
+								"x": 0,
+								"y": 0
+							},
+							"frameSpace": 0
+						}
+					]
+			}
+		]
+	}
+]
