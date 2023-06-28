@@ -1,5 +1,6 @@
-//import animationJson from "../../animation/setas.json" assert {type: 'json'};
+import animationJson from "../../animation/setas.json" assert {type: 'json'};
 import * as communs from './communs.js';
+import * as gridMapEdit from '../../gridMapEditor.js'
 
 export const skillBinding = {
 	skill1: { pressed: false, isHold: false },
@@ -8,108 +9,54 @@ export const skillBinding = {
 	skill4: { pressed: false, isHold: false },
 };
 
+export const skills = {
+	skill1: {
+		init: function (data) {
+			
+			if(data.entity.id == data.helpers.game.getUserId()) {
+				const onAnimationEnd = ({ animator }) => {
+					animator.addColorFilter(0, 0, 25);
+					animator.onAnimationEnd.remove(onAnimationEnd);
+				}
+				data.entity.animation.onAnimationEnd.add(onAnimationEnd);
+				data.entity.animation.changeAnimation('invisible');
+			}
+			else{
+				const onAnimationEnd = ({ animator }) => {
+					animator.isVisible = false;
+					animator.onAnimationEnd.remove(onAnimationEnd);
+				}
+				data.entity.animation.onAnimationEnd.add(onAnimationEnd);
+				data.entity.animation.changeAnimation('invisible');
+			}
+		},
+		end: function (data) { 
+			data.entity.animation.isVisible = true; 
+			data.entity.animation.removeColorFilter();
+		},
+		isClient: false,
+		cd: 1000 * 60 * 1,
+		activeTime: 8000
+	},
+	skill2: {
+		init: function (data) {
+			if(data.entity.skills.skill2.active){
+				data.entity.skillEnd('skill2');
+				return;
+			}
+			gridMapEdit.startEdit();
+			data.entity.skills.skill2.active = true;
+		},
+		end: function (data) { 
+			gridMapEdit.stopEdit();
+			data.entity.skills.skill2.active = false;
+		},
+		isClient: true,
+		cd: 1000 * 60 * 0.1,
+		activeTime: -1000
+	}
+};
+
 export function	getAnimationName(){
 	return 'setas';
-}
-
-export function skill1(data, currentSkillData){
-	if(!data.tag || data.tag == '') throw new Error("Skill was sended without 'tag'");
-
-	if(data.tag == 'press'){
-		if(currentSkillData.onCD) return;
-		if(currentSkillData.active) return;
-		communs.emitSkill('skill1', { tag: 'init' });
-		return;
-	}
-	
-	if(data.tag == 'init'){
-		currentSkillData.active = true;
-		currentSkillData.onCD = true;
-		currentSkillData.lastActive = Date.now();
-		currentSkillData.activedTime = 1000;
-		currentSkillData.CDTime = 1000;
-		return;
-	}
-
-	if(data.tag == 'inactive'){
-		currentSkillData.active = false;
-		return;
-	}
-	
-	if(data.tag == 'clearCD'){
-		currentSkillData.onCD = false;
-		return;
-	}
-	
-}
-
-export function skill2(data, currentSkillData){
-	if(!data.tag || data.tag == '') throw new Error("Skill was sended without 'tag'");
-
-	if(data.tag == 'press'){
-		if(currentSkillData.onCD) return;
-		communs.emitSkill('skill2', { tag: 'init' });
-		return;
-	}
-	
-	if(data.tag == 'init'){
-		currentSkillData.onCD = true;
-		currentSkillData.lastActive = Date.now();
-		currentSkillData.activedTime = 0;
-		currentSkillData.CDTime = 1000;
-		if(currentSkillData.active) {
-			currentSkillData.active = false;
-		}else {
-			currentSkillData.active = true;
-		}
-		return;
-	}
-
-	if(data.tag == 'inactive'){
-		currentSkillData.active = false;
-		return;
-	}
-	
-	if(data.tag == 'clearCD'){
-		currentSkillData.onCD = false;
-		return;
-	}
-}
-
-export function skill3(data, currentSkillData){
-	if(!data.tag || data.tag == '') throw new Error("Skill was sended without 'tag'");
-
-	if(data.tag == 'press'){
-		if(currentSkillData.onCD) return;
-		if(currentSkillData.active) return;
-		communs.emitSkill('skill3', { tag: 'init' });
-		return;
-	}
-	
-	if(data.tag == 'init'){
-		currentSkillData.active = true;
-		currentSkillData.onCD = true;
-		currentSkillData.lastActive = Date.now();
-		currentSkillData.activedTime = 10000;
-		currentSkillData.CDTime = 1000;
-		if(this.id != this.game.userId) 
-			this.animation.changeAnimation('invisible', function (x) { x.animation.isVisible = false; });
-		else
-			this.animation.changeAnimation('invisible', function (x) { currentSkillData.colorId = this.addColorFilter(0, 0, 25); });
-		
-		return;
-	}
-
-	if(data.tag == 'inactive'){
-		currentSkillData.active = false;
-		this.animation.isVisible = true;
-		if(currentSkillData.colorId) this.animation.removeColorFilter(currentSkillData.colorId);
-		return;
-	}
-	
-	if(data.tag == 'clearCD'){
-		currentSkillData.onCD = false;
-		return;
-	}
-	
 }

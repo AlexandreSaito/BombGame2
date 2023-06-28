@@ -15,8 +15,10 @@ export default class Projectile extends Object {
 	update(){
 		super.update();
 		const velocity = this.getVelocity();
-		if(!this.wasEnded && this.position.x < this.destination.x + velocity && this.position.x > this.destination.x - velocity &&
-			 this.position.y < this.destination.y + velocity && this.position.y > this.destination.y - velocity) {
+		const distx = this.destination.x - this.position.x;
+		const disty = this.destination.y - this.position.y;
+		if(!this.wasEnded && distx < velocity && distx > velocity * -1 &&
+			 disty < velocity && disty > velocity * -1) {
 			if(game.getPlayer().isColliding(this)) {
 				game.getPlayer().takeDamage(this.damage, 1);
 			}
@@ -24,7 +26,7 @@ export default class Projectile extends Object {
 			this.wasEnded = true;
 		}
 		
-		this.move({ x: this.destination.x - this.position.x, y: this.destination.y - this.position.y });
+		this.move({ x: distx, y: disty });
 	}
 	
 }

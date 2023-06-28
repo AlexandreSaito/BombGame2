@@ -86,7 +86,15 @@ function shoot(eventData, data){
 		type: type.typesId.projectile, 
 		name: 'projectile', 
 		position: { ...data.entity.position }, 
-		data: { destination: { ...eventData.asGridPos }, type: 'akio_shoot' } 
+		width: data.helpers.game.gridSize / 3,
+		height: data.helpers.game.gridSize / 3,
+		data: { 
+			destination: { 
+				x: eventData.asGridPos.x + (data.helpers.game.gridSize - data.helpers.game.gridSize / 3) / 2, 
+				y: eventData.asGridPos.y + (data.helpers.game.gridSize - data.helpers.game.gridSize / 3) / 2
+			}, 
+			type: 'akio_shoot' 
+		} 
 	});
 	data.entity.skillEnd('skill2');
 }

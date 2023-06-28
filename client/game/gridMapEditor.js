@@ -98,7 +98,7 @@ export function stopEdit(){
 	game.removeMouseEvent('mousedown', onMouseDown);
 	renderer.setItemCanvas(null, drawType.debug, -1, -1);
 	renderer.setItemCanvas(null, drawType.debug, -1, -2);
-	menus.innerHTML = '';
+	wrapper.innerHTML = '';
 }
 
 const actions = {

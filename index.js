@@ -52,7 +52,7 @@ const objects = toReadonly({
   bomb: { name: "Bomb", drawType: objectTypes.item, typeId: typesId.bomb, width: mapGridSize, height: mapGridSize, resizeable: false, },
   //bombPlace: { name: "Bomb Place", drawType: objectTypes.debug, typeId: typesId.bombPlace, width: mapGridSize, height: mapGridSize, resizeable: false, },
   powerup: { name: "Power Up", drawType: objectTypes.item, typeId: typesId.powerup, width: mapGridSize, height: mapGridSize, resizeable: false, },
-  projectile: { name: "Projectile", drawType: objectTypes.item, typeId: typesId.projectile, width: mapGridSize, height: mapGridSize, resizeable: false, },
+  projectile: { name: "Projectile", drawType: objectTypes.effect, typeId: typesId.projectile, width: mapGridSize, height: mapGridSize, resizeable: false, data: { type: 'akio_shoot' } },
 });
 
 const powerUps = toReadonly({

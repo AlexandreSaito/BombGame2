@@ -100,6 +100,7 @@ export default class Entity extends Object {
 	
 	death() { 
 		console.log('i\'m dead');
+		this.canWalk = false;
 		this.animation.removeColorFilter();
 		this.animation.changeAnimation('death');
 		const onDeathEnd = (anime) => {
