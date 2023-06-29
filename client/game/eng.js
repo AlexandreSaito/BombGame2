@@ -45,7 +45,7 @@ let clientFps = 0;
 
 let preloading = null;
 
-btnSaito.onclick = () => { charSelector.innerHTML = '<option value="saitoadm">saitoadm</option>'; };
+//btnSaito.onclick = () => { charSelector.innerHTML = '<option value="saitoadm">saitoadm</option>'; };
 
 charSelectorDialog.onsubmit = () => {
 	const playerData = { char: charSelector.value };

@@ -34,25 +34,31 @@ export const skills = {
 				return;
 			}
 			if(data.entity.id == data.helpers.game.getUserId()){
-				data.entity.skills.skill2.onShoot = (e) => { shoot(e, data); };
-				data.entity.skills.skill2.onAimMove = (e) => { onAimMove(e, data); };
-				data.helpers.game.registerMouseEvent('mouseup', data.entity.skills.skill2.onShoot);
-				data.helpers.game.registerMouseEvent('mousemove', data.entity.skills.skill2.onAimMove);
+				if(!data.entity.skillData) data.entity.skillData = {};
+				if(!data.entity.skillData.onShoot) {
+					data.entity.skillData.aimId = renderer.getSingleId(-10);
+					data.entity.skillData.canvas = new OffscreenCanvas(data.helpers.game.gridSize, data.helpers.game.gridSize);
+					drawAim(data.entity.skillData.canvas, data);
+					data.entity.skillData.onShoot = (e) => { shoot(e, data); };
+					data.entity.skillData.onAimMove = (e) => { onAimMove(e, data); };
+				}
+				data.helpers.game.registerMouseEvent('mouseup', data.entity.skillData.onShoot);
+				data.helpers.game.registerMouseEvent('mousemove', data.entity.skillData.onAimMove);
 			}
 			data.entity.skills.skill2.active = true;
-			data.entity.skills.skill2.timeout = setTimeout(() => { data.entity.skillEnd('skill2'); }, data.entity.skill2.activeTime * 2 * -1);
+			data.entity.skillData.endSkill2Timeout = setTimeout(() => { if(data.entity.skills.skill2?.active) data.entity.skillEnd('skill2'); }, data.entity.skill2.activeTime * 2 * -1);
 		},
 		end: function (data) { 
 			if(data.entity.id == data.helpers.game.getUserId()){
-				data.helpers.game.removeMouseEvent('mouseup', data.entity.skills.skill2.onShoot);
-				data.helpers.game.removeMouseEvent('mousemove', data.entity.skills.skill2.onAimMove);
-				renderer.setItemCanvas(null, renderer.getDrawType().effect, -10, data.entity.skills.skill2.aimId);
+				data.helpers.game.removeMouseEvent('mouseup', data.entity.skillData.onShoot);
+				data.helpers.game.removeMouseEvent('mousemove', data.entity.skillData.onAimMove);
+				renderer.setItemCanvas(null, renderer.getDrawType().effect, -10, data.entity.skillData.aimId);
 			}
-			clearTimeout(data.entity.skills.skill2.timeout);
+			clearTimeout(data.entity.skillData.endSkill2Timeout);
 			data.entity.skills.skill2.active = false;
 		},
 		isClient: true,
-		cd: 1000 * 60 * 1,
+		cd: 1000 * 60 * 0.1,
 		activeTime: -8000
 	}
 };
@@ -61,23 +67,22 @@ export function	getAnimationName(){
 	return 'setas';
 }
 
+function drawAim(canvas, data){
+	const ctx = canvas.getContext('2d');
+	ctx.fillRect(0, 0, data.helpers.game.gridSize, data.helpers.game.gridSize);
+}
+
 function onAimMove(eventData, data){
-	if(!data.canvas) {
-		data.canvas = new OffscreenCanvas(data.helpers.game.gridSize, data.helpers.game.gridSize);
-		data.ctx = data.canvas.getContext('2d');
-		data.ctx.fillRect(0, 0, data.helpers.game.gridSize, data.helpers.game.gridSize);
-		data.entity.skills.skill2.aimId = renderer.getSingleId(-10);
-	}
 	// change entity animation?
 	
 	// place aim
 	const canvasData = {
-		canvas: data.canvas,
+		canvas: data.entity.skillData.canvas,
 		position: eventData.asGridPos,
 		width: data.helpers.game.gridSize,
 		height: data.helpers.game.gridSize
 	};
-	renderer.setItemCanvas(canvasData, renderer.getDrawType().effect, -10, data.entity.skills.skill2.aimId);
+	renderer.setItemCanvas(canvasData, renderer.getDrawType().effect, -10, data.entity.skillData.aimId);
 }
 
 function shoot(eventData, data){

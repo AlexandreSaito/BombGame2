@@ -26,7 +26,7 @@ export default class Projectile extends Object {
 			this.wasEnded = true;
 		}
 		
-		this.move({ x: distx, y: disty });
+		this.move({ x: distx / disty, y: disty / distx });
 	}
 	
 }

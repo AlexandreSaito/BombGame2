@@ -52,7 +52,7 @@ function register(char, entity) {
 		if(!skill) return;
 
 		if(skill.activeTime < 0 && (!entity.skills[data.name] || !entity.skills[data.name].active)){
-			setTimeout(() => { entity.skills[data.name].onCD = false; }, skill.activeTime * -1);
+			setTimeout(() => { if(entity.skills[data.name]) entity.skills[data.name].onCD = false; }, skill.activeTime * -1);
 		}
 
 		if(skill.isClient){
